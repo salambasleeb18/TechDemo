@@ -3,12 +3,12 @@ package com.techlearn.demo;
 import org.springframework.stereotype.Service;
 
 /**
- * Service class to manage the Fan's state.
+ * This service handles the fan's state.
  */
 @Service
 public class DemoFanService {
     private int speed; // Fan speed (0: Off, 1: Low, 2: Medium, 3: High)
-    private boolean isReversed; // Fan direction (true: reversed, false: normal)
+    private boolean isReversed; // Is the fan going in reverse?
 
     public DemoFanService() {
         this.speed = 0; // Fan starts off
@@ -24,16 +24,17 @@ public class DemoFanService {
     }
 
     /**
-     * Changes the fan speed in a circular manner (0 -> 1 -> 2 -> 3).
+     * Pull the speed cord to change the fan speed.
+     * This goes in a circle: 0 -> 1 -> 2 -> 3 -> back to 0.
      */
     public void pullSpeedCord() {
-        speed = (speed + 1) % 4; // Cycle through 0, 1, 2, 3
+        speed = (speed + 1) % 4; // Just cycling through the speeds
     }
 
     /**
-     * Toggles the fan direction between normal and reversed.
+     * Pull the direction cord to switch the fan's direction.
      */
     public void pullDirectionCord() {
-        isReversed = !isReversed;
+        isReversed = !isReversed; // Flip the direction
     }
 }
