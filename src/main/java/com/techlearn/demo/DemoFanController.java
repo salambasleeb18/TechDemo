@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST Controller to expose Fan functionality.
+ * This controller manages everything about the fan.
  */
 @RestController
 public class DemoFanController {
@@ -19,33 +19,33 @@ public class DemoFanController {
     }
 
     /**
-     * Get the current fan status (speed and direction).
-     * @return String describing the fan's speed and direction.
+     * Get the current status of the fan, like its speed and direction.
+     * @return A simple message about the fan's speed and direction.
      */
     @GetMapping("/fan/status")
     public String getFanStatus() {
         String direction = fanService.isReversed() ? "reversed" : "normal";
-        return "Fan speed is " + fanService.getSpeed() + " and direction is " + direction;
+        return "Right now, the fan is at speed " + fanService.getSpeed() + " and it's going " + direction + ".";
     }
 
     /**
-     * Pulls the speed cord, cycling through speeds.
-     * @return String showing the new fan speed.
+     * Pull the speed cord to change the fan's speed.
+     * @return A message showing the new fan speed.
      */
     @PostMapping("/fan/speed")
     public String pullSpeedCord() {
         fanService.pullSpeedCord();
-        return "Speed cord pulled. Fan speed is now " + fanService.getSpeed();
+        return "You pulled the speed cord! The fan speed is now " + fanService.getSpeed() + ".";
     }
 
     /**
-     * Pulls the direction cord, reversing the fan's direction.
-     * @return String showing the new fan direction.
+     * Pull the direction cord to change the fan's direction.
+     * @return A message showing the new fan direction.
      */
     @PostMapping("/fan/direction")
     public String pullDirectionCord() {
         fanService.pullDirectionCord();
         String direction = fanService.isReversed() ? "reversed" : "normal";
-        return "Direction cord pulled. Fan direction is now " + direction;
+        return "You pulled the direction cord! The fan is now going " + direction + ".";
     }
 }
